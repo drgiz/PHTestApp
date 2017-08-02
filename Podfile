@@ -8,5 +8,6 @@ target 'PHTestApp' do
   # Pods for PHTestApp
 
 	pod 'SwiftyJSON', '~> 3.1'
+	pod 'Alamofire', '~> 4.5'
 
 end
