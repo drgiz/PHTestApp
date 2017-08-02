@@ -13,7 +13,7 @@ import SwiftyJSON
 class FeedController: UITableViewController {
     
     var collections = [Collection]()
-    let networkManager = NetworkManager()
+    let applicationManager = ApplicationManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,28 +21,61 @@ class FeedController: UITableViewController {
     }
     
     func fetchFeed() {
-        guard let url = URL(string: "https://api.producthunt.com/v1/collections?sort_by=created_at&order=asc&access_token=591f99547f569b05ba7d8777e2e0824eea16c440292cce1f8dfb3952cc9937ff&search[category]=1&per_page=10") else { return }
-        
-        NetworkManager.request(url: url) { response in
+        applicationManager.getCollectionsFeed { response in
             switch response.result {
             case .success( _):
                 let responseJSON = JSON(response.data!)
                 let collectionsJSON = responseJSON["collections"] as JSON
-                    for (_,collectionJSON) in collectionsJSON {
-                        let collection = Collection(json: collectionJSON)
-                        self.collections.append(collection)
+                for (_,collectionJSON) in collectionsJSON {
+                    let collection = Collection(json: collectionJSON)
+                    self.collections.append(collection)
+                    DispatchQueue.main.async(execute: {
+                        self.tableView.reloadData()
+                    })
                 }
             case .failure(let error):
                 print(error)
             }
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+// MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        var numOfSections: Int = 0
+        if collections.count>0
+        {
+            tableView.separatorStyle = .singleLine
+            tableView.separatorInset = .zero
+            numOfSections = 1
+            tableView.backgroundView = nil
+        }
+        else
+        {
+            let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0,
+                                                             y: 0,
+                                                             width: tableView.bounds.size.width,
+                                                             height: tableView.bounds.size.height))
+            noDataLabel.text = "No data to display :("
+            noDataLabel.textColor = UIColor.black
+            noDataLabel.textAlignment = .center
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .none
+        }
+        return numOfSections
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.collections.count
+    }
 }
 
