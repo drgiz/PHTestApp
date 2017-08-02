@@ -6,5 +6,15 @@
 //  Copyright © 2017 Svyatoslav Bykov. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class CollectionCell: UITableViewCell {
+    
+    @IBOutlet weak var cellThumbnail: UIImageView!
+
+    @IBOutlet weak var cellName: UILabel!
+    @IBOutlet weak var cellDescription: UILabel!
+    
+    @IBOutlet weak var cellUpvotes: UILabel!
+}
 

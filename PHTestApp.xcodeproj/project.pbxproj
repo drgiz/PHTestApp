@@ -18,6 +18,7 @@
 		6399A9161F2FEB5B0023A9BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6399A9141F2FEB5B0023A9BD /* Main.storyboard */; };
 		6399A9181F2FEB5B0023A9BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6399A9171F2FEB5B0023A9BD /* Assets.xcassets */; };
 		6399A91B1F2FEB5B0023A9BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6399A9191F2FEB5B0023A9BD /* LaunchScreen.storyboard */; };
+		63BF2CBB1F32745A0070CA40 /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BF2CBA1F32745A0070CA40 /* CollectionCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		6399A9171F2FEB5B0023A9BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6399A91A1F2FEB5B0023A9BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6399A91C1F2FEB5B0023A9BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63BF2CBA1F32745A0070CA40 /* CollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
 		76833087F03AB4E5BA4D9306 /* Pods-PHTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PHTestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-PHTestApp/Pods-PHTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		AAC4D84C4D438621DB61932C /* Pods-PHTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PHTestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PHTestApp/Pods-PHTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +122,7 @@
 				635D085D1F32681D00DD8157 /* View */,
 				6380AF4F1F309890000EDC6A /* Controller */,
 				6399A9141F2FEB5B0023A9BD /* Main.storyboard */,
+				63BF2CBA1F32745A0070CA40 /* CollectionCell.xib */,
 				6399A9171F2FEB5B0023A9BD /* Assets.xcassets */,
 				6399A9191F2FEB5B0023A9BD /* LaunchScreen.storyboard */,
 				6399A91C1F2FEB5B0023A9BD /* Info.plist */,
@@ -191,6 +194,7 @@
 				6399A91B1F2FEB5B0023A9BD /* LaunchScreen.storyboard in Resources */,
 				6399A9181F2FEB5B0023A9BD /* Assets.xcassets in Resources */,
 				6399A9161F2FEB5B0023A9BD /* Main.storyboard in Resources */,
+				63BF2CBB1F32745A0070CA40 /* CollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

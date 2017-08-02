@@ -14,9 +14,13 @@ class FeedController: UITableViewController {
     
     var collections = [Collection]()
     let applicationManager = ApplicationManager.shared
+    let collectionCellIdentifier = "CollectionCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nib = UINib (nibName: collectionCellIdentifier, bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: collectionCellIdentifier)
+        
         fetchFeed()
     }
     
@@ -47,7 +51,17 @@ class FeedController: UITableViewController {
 // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: collectionCellIdentifier, for: indexPath)
+        if let cell = cell as? CollectionCell {
+            cell.cellName.text = collections[indexPath.row].name
+            cell.cellDescription.text = collections[indexPath.row].title
+        }
+        
         return UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 130
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
