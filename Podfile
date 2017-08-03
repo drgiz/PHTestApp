@@ -9,5 +9,6 @@ target 'PHTestApp' do
 
 	pod 'SwiftyJSON', '~> 3.1'
 	pod 'Alamofire', '~> 4.5'
+    pod 'SDWebImage', '~> 4.1'
 
 end

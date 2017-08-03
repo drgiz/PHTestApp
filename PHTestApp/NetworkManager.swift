@@ -11,11 +11,11 @@ import Alamofire
 
 class NetworkManager {
     
-    func request(url: URL, response: @escaping (_ response: DataResponse<Any>) -> Void) {
+    func request(url: URLConvertible, response: @escaping (_ response: DataResponse<Any>) -> Void) {
         Alamofire.request(url).validate().responseJSON(completionHandler: response)
     }
     
-    func requestWithParameters (url: URL, parameters:[String:Any], response: @escaping (_ response: DataResponse<Any>) -> Void){
+    func requestWithParameters (url: URLConvertible, parameters:[String:Any], response: @escaping (_ response: DataResponse<Any>) -> Void){
         Alamofire.request(url, parameters: parameters).validate().responseJSON(completionHandler: response)
     }
 }

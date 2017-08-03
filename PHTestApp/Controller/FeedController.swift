@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import SDWebImage
 
 
 class FeedController: UITableViewController {
@@ -28,7 +29,7 @@ class FeedController: UITableViewController {
     }
     
     func fetchFeed() {
-        applicationManager.getCollectionsFeed { response in
+        applicationManager.getPostsFeed(withCategory: 1, numberOfPosts: 10, response: { response in
             switch response.result {
             case .success( _):
                 let responseJSON = JSON(response.data!)
@@ -43,7 +44,7 @@ class FeedController: UITableViewController {
             case .failure(let error):
                 print(error)
             }
-        }
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,7 +59,8 @@ class FeedController: UITableViewController {
         if let cell = cell as? PostCell {
             cell.name.text = posts[indexPath.row].name
             cell.tagline.text = posts[indexPath.row].tagline
-            cell.upvotes.text = String(posts[indexPath.row].votes_count)
+            cell.upvotes.text = "👍"+String(posts[indexPath.row].votes_count)
+            cell.thumbnail.sd_setImage(with: URL(string:posts[indexPath.row].thumbnail_url))
         }
         
         return UITableViewCell()
