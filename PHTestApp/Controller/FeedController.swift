@@ -12,14 +12,17 @@ import SwiftyJSON
 
 class FeedController: UITableViewController {
     
-    var collections = [Collection]()
+    var posts = [Post]()
     let applicationManager = ApplicationManager.shared
-    let collectionCellIdentifier = "CollectionCell"
+    let postCellIdentifier = "PostCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nib = UINib (nibName: collectionCellIdentifier, bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: collectionCellIdentifier)
+        let nib = UINib (nibName: postCellIdentifier, bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: postCellIdentifier)
+        
+        tableView.estimatedRowHeight = 120
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         fetchFeed()
     }
@@ -29,10 +32,10 @@ class FeedController: UITableViewController {
             switch response.result {
             case .success( _):
                 let responseJSON = JSON(response.data!)
-                let collectionsJSON = responseJSON["collections"] as JSON
-                for (_,collectionJSON) in collectionsJSON {
-                    let collection = Collection(json: collectionJSON)
-                    self.collections.append(collection)
+                let postsJSON = responseJSON["posts"] as JSON
+                for (_,postJSON) in postsJSON {
+                    let post = Post(json: postJSON)
+                    self.posts.append(post)
                     DispatchQueue.main.async(execute: {
                         self.tableView.reloadData()
                     })
@@ -51,10 +54,11 @@ class FeedController: UITableViewController {
 // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: collectionCellIdentifier, for: indexPath)
-        if let cell = cell as? CollectionCell {
-            cell.cellName.text = collections[indexPath.row].name
-            cell.cellDescription.text = collections[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: postCellIdentifier, for: indexPath)
+        if let cell = cell as? PostCell {
+            cell.name.text = posts[indexPath.row].name
+            cell.tagline.text = posts[indexPath.row].tagline
+            cell.upvotes.text = String(posts[indexPath.row].votes_count)
         }
         
         return UITableViewCell()
@@ -66,7 +70,7 @@ class FeedController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         var numOfSections: Int = 0
-        if collections.count>0
+        if posts.count>0
         {
             tableView.separatorStyle = .singleLine
             tableView.separatorInset = .zero
@@ -89,7 +93,7 @@ class FeedController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.collections.count
+        return self.posts.count
     }
 }
 
