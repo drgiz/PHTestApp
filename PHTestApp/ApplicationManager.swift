@@ -9,6 +9,13 @@
 import Foundation
 import Alamofire
 
+enum Category: String {
+    case Tech = "1"
+    case Games = "2"
+    case Podcasts = "3"
+    case Books = "4"
+}
+
 class ApplicationManager {
     static let shared = ApplicationManager()
     let networkManager: NetworkManager
@@ -19,13 +26,13 @@ class ApplicationManager {
         self.networkManager = NetworkManager()
     }
     
-    func getPostsFeed(withCategory: Int? = nil, numberOfPosts: Int? = nil, response: @escaping (_ response: DataResponse<Any>) -> Void) {
+    func getPostsFeed(withCategory: Category? = nil, numberOfPosts: Int? = nil, response: @escaping (_ response: DataResponse<Any>) -> Void) {
         let url = baseURL+"posts"
         var parameters = ["sort_by":"created_at",
                           "order":"asc",
                           "access_token":access_token]
         if let category = withCategory {
-            parameters["search[category]"] = String(category)
+            parameters["search[category]"] = category.rawValue
         }
         if let numberOfPosts = numberOfPosts {
             parameters["per_page"] = String(numberOfPosts)

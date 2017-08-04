@@ -22,14 +22,11 @@ class FeedController: UITableViewController {
         let nib = UINib (nibName: postCellIdentifier, bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: postCellIdentifier)
         
-        tableView.estimatedRowHeight = 120
-        tableView.rowHeight = UITableViewAutomaticDimension
-        
         fetchFeed()
     }
     
     func fetchFeed() {
-        applicationManager.getPostsFeed(withCategory: 1, numberOfPosts: 10, response: { response in
+        applicationManager.getPostsFeed(withCategory: Category.Tech, numberOfPosts: 10, response: { response in
             switch response.result {
             case .success( _):
                 let responseJSON = JSON(response.data!)
@@ -60,14 +57,21 @@ class FeedController: UITableViewController {
             cell.name.text = posts[indexPath.row].name
             cell.tagline.text = posts[indexPath.row].tagline
             cell.upvotes.text = "👍"+String(posts[indexPath.row].votes_count)
-            cell.thumbnail.sd_setImage(with: URL(string:posts[indexPath.row].thumbnail_url))
+            cell.thumbnail.sd_setShowActivityIndicatorView(true)
+            cell.thumbnail.sd_setIndicatorStyle(.gray)
+            cell.thumbnail.sd_setImage(with: URL(string:posts[indexPath.row].thumbnail_url),
+                                       placeholderImage: nil,
+                                       options: [.retryFailed],
+                                       completed: { (_, error, _, _) in
+                                        guard error != nil else {return}
+                                        cell.thumbnail.sd_removeActivityIndicator() })
         }
         
         return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
+        return 125
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
