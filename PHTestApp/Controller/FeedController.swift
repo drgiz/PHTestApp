@@ -19,6 +19,9 @@ class FeedController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
         let nib = UINib (nibName: postCellIdentifier, bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: postCellIdentifier)
         

@@ -17,6 +17,9 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     var post:Post?
     
     override func viewDidLoad() {
+        title = post?.name
+        
+        
         if let post = post {
             if post.screenshot_url_350px != "" {
                 postScreenshot.sd_setImage(with: URL(string: post.screenshot_url_350px))
