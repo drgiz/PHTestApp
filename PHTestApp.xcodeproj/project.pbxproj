@@ -97,6 +97,16 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		638721E61F33B14D00EB206A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				6399A9141F2FEB5B0023A9BD /* Main.storyboard */,
+				63BF2CBA1F32745A0070CA40 /* PostCell.xib */,
+				6399A9191F2FEB5B0023A9BD /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		6399A9041F2FEB5A0023A9BD = {
 			isa = PBXGroup;
 			children = (
@@ -124,10 +134,8 @@
 				6380AF4E1F309886000EDC6A /* Model */,
 				635D085D1F32681D00DD8157 /* View */,
 				6380AF4F1F309890000EDC6A /* Controller */,
-				6399A9141F2FEB5B0023A9BD /* Main.storyboard */,
-				63BF2CBA1F32745A0070CA40 /* PostCell.xib */,
+				638721E61F33B14D00EB206A /* Storyboards */,
 				6399A9171F2FEB5B0023A9BD /* Assets.xcassets */,
-				6399A9191F2FEB5B0023A9BD /* LaunchScreen.storyboard */,
 				6399A91C1F2FEB5B0023A9BD /* Info.plist */,
 			);
 			path = PHTestApp;
