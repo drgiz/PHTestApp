@@ -86,7 +86,7 @@ class FeedController: UITableViewController {
                                         cell.thumbnail.sd_removeActivityIndicator() })
         }
         
-        return UITableViewCell()
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
