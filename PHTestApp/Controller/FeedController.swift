@@ -20,6 +20,8 @@ class FeedController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.prefetchDataSource = self
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         let nib = UINib (nibName: postCellIdentifier, bundle: nil)
@@ -42,6 +44,7 @@ class FeedController: UITableViewController {
         applicationManager.getPostsFeed(withCategory: Category.Tech, numberOfPosts: 10, response: { response in
             switch response.result {
             case .success( _):
+                self.posts = [Post]()
                 // MARK: - Populate posts upon success
                 let responseJSON = JSON(response.data!)
                 let postsJSON = responseJSON["posts"] as JSON
@@ -80,7 +83,7 @@ class FeedController: UITableViewController {
             cell.thumbnail.sd_setIndicatorStyle(.gray)
             cell.thumbnail.sd_setImage(with: URL(string:posts[indexPath.row].thumbnail_url),
                                        placeholderImage: nil,
-                                       options: [.retryFailed],
+                                       options: [.retryFailed, .scaleDownLargeImages],
                                        completed: { (_, error, _, _) in
                                         guard error != nil else {return}
                                         cell.thumbnail.sd_removeActivityIndicator() })
@@ -137,5 +140,22 @@ class FeedController: UITableViewController {
         }
     }
     
+}
+
+//MARK: - Image Prefetching
+extension FeedController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        var urls:[URL]?
+        for indexPath in indexPaths {
+            if let url = URL(string:posts[indexPath.row].thumbnail_url) {
+                urls?.append(url)
+            }
+        }
+        SDWebImagePrefetcher.shared().prefetchURLs(urls)
+    }
+    
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        SDWebImagePrefetcher.shared().cancelPrefetching()
+    }
 }
 

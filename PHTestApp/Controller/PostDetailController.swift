@@ -28,7 +28,6 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         
         //MARK: - Get it button setup
         getItButton.backgroundColor = UIColor.productHuntOrange
-        getItButton.setTitleColor(UIColor.white, for: .normal)
         if let font = UIFont(name: "Helvetica", size: 24.0) {
             getItButton.setAttributedTitle(NSAttributedString(string: "Get it!", attributes:
                 [NSForegroundColorAttributeName: UIColor.white,
