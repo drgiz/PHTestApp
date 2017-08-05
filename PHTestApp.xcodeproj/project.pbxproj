@@ -22,6 +22,7 @@
 		6399A9161F2FEB5B0023A9BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6399A9141F2FEB5B0023A9BD /* Main.storyboard */; };
 		6399A9181F2FEB5B0023A9BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6399A9171F2FEB5B0023A9BD /* Assets.xcassets */; };
 		6399A91B1F2FEB5B0023A9BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6399A9191F2FEB5B0023A9BD /* LaunchScreen.storyboard */; };
+		63E566CC1F3537AE001F230C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E566CB1F3537AE001F230C /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		6399A9171F2FEB5B0023A9BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6399A91A1F2FEB5B0023A9BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6399A91C1F2FEB5B0023A9BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63E566CB1F3537AE001F230C /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		76833087F03AB4E5BA4D9306 /* Pods-PHTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PHTestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-PHTestApp/Pods-PHTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		AAC4D84C4D438621DB61932C /* Pods-PHTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PHTestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PHTestApp/Pods-PHTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,8 +108,8 @@
 		638721E61F33B14D00EB206A /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				636F2BD11F35074A00F55D81 /* PostCell.xib */,
 				6399A9141F2FEB5B0023A9BD /* Main.storyboard */,
+				636F2BD11F35074A00F55D81 /* PostCell.xib */,
 				6399A9191F2FEB5B0023A9BD /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
@@ -143,6 +145,7 @@
 				638721E61F33B14D00EB206A /* Storyboards */,
 				6399A9171F2FEB5B0023A9BD /* Assets.xcassets */,
 				6399A91C1F2FEB5B0023A9BD /* Info.plist */,
+				63E566CB1F3537AE001F230C /* UIColorExtension.swift */,
 			);
 			path = PHTestApp;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				635D08571F31F19C00DD8157 /* NetworkManager.swift in Sources */,
 				636F2BC61F34FDE200F55D81 /* PostDetailController.swift in Sources */,
 				6399A9131F2FEB5B0023A9BD /* FeedController.swift in Sources */,
+				63E566CC1F3537AE001F230C /* UIColorExtension.swift in Sources */,
 				635D085C1F32681600DD8157 /* PostCell.swift in Sources */,
 				6399A9111F2FEB5B0023A9BD /* AppDelegate.swift in Sources */,
 			);

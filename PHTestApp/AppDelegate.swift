@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch
         
 //MARK: - Customize UINavigationBar appearenc
-        UINavigationBar.appearance().barTintColor = UIColor(red: 207.0/255, green: 63.0/255, blue: 36.0/255, alpha: 1.0)
+        UINavigationBar.appearance().barTintColor = UIColor.productHuntOrange
         UINavigationBar.appearance().tintColor = UIColor.white
         if let font = UIFont(name: "Helvetica", size: 24.0) {
             UINavigationBar.appearance().titleTextAttributes =

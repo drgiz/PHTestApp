@@ -8,23 +8,33 @@
 
 import UIKit
 import SDWebImage
+import SafariServices
 
 class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var postScreenshot: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var getItButton: UIButton!
     
     let postDetailCellIdentifier = "PostDetailTableViewCell"
     var post:Post?
+    var redirectUrl: URL?
     
     override func viewDidLoad() {
         title = post?.name
         
+        tableView.estimatedRowHeight = 36
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         if let post = post {
             if post.screenshot_url_350px != "" {
                 postScreenshot.sd_setImage(with: URL(string: post.screenshot_url_350px))
             } else if post.screenshot_url_850px != "" {
                 postScreenshot.sd_setImage(with: URL(string: post.screenshot_url_850px))
+            }
+            if let url = URL(string:post.redirect_url) {
+                getItButton.isEnabled = true
+                redirectUrl = url
             }
         }
     }
@@ -47,7 +57,9 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.valueLabel.text = post?.tagline
             case 2:
                 cell.fieldLabel.text = "Upvotes"
-                cell.valueLabel.text = String(describing: post?.votes_count)
+                if let votes_count = post?.votes_count{
+                    cell.valueLabel.text = String(votes_count)
+                }
             case 3:
                 cell.fieldLabel.text = "URL"
                 cell.valueLabel.text = post?.redirect_url
@@ -58,6 +70,14 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         return cell
 
+    }
+    @IBAction func getItButtonTap(_ sender: Any) {
+        if let url = redirectUrl {
+            let safariController = SFSafariViewController(url: url)
+            UIApplication.shared.statusBarStyle = .default
+            present(safariController, animated: true, completion: nil)
+//            UIApplication.shared.open(url)
+        }
     }
     
 }
