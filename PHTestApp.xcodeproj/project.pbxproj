@@ -137,17 +137,25 @@
 			isa = PBXGroup;
 			children = (
 				6399A9101F2FEB5B0023A9BD /* AppDelegate.swift */,
-				635D08561F31F19C00DD8157 /* NetworkManager.swift */,
-				635D08581F32175100DD8157 /* ApplicationManager.swift */,
 				6380AF4E1F309886000EDC6A /* Model */,
 				635D085D1F32681D00DD8157 /* View */,
 				6380AF4F1F309890000EDC6A /* Controller */,
 				638721E61F33B14D00EB206A /* Storyboards */,
+				63E566CD1F361795001F230C /* Support Files */,
 				6399A9171F2FEB5B0023A9BD /* Assets.xcassets */,
-				6399A91C1F2FEB5B0023A9BD /* Info.plist */,
-				63E566CB1F3537AE001F230C /* UIColorExtension.swift */,
 			);
 			path = PHTestApp;
+			sourceTree = "<group>";
+		};
+		63E566CD1F361795001F230C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				635D08561F31F19C00DD8157 /* NetworkManager.swift */,
+				635D08581F32175100DD8157 /* ApplicationManager.swift */,
+				63E566CB1F3537AE001F230C /* UIColorExtension.swift */,
+				6399A91C1F2FEB5B0023A9BD /* Info.plist */,
+			);
+			name = "Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

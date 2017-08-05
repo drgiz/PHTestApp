@@ -25,6 +25,16 @@ class FeedController: UITableViewController {
         let nib = UINib (nibName: postCellIdentifier, bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: postCellIdentifier)
         
+        // MARK: - Setup pull to refresh
+        refreshControl = UIRefreshControl()
+        refreshControl?.backgroundColor = .white
+        refreshControl?.tintColor = .gray
+        refreshControl?.addTarget(self, action: #selector(fetchFeedFromInternet), for: .valueChanged)
+        
+        fetchFeed()
+    }
+    
+    func fetchFeedFromInternet() {
         fetchFeed()
     }
     
@@ -32,6 +42,7 @@ class FeedController: UITableViewController {
         applicationManager.getPostsFeed(withCategory: Category.Tech, numberOfPosts: 10, response: { response in
             switch response.result {
             case .success( _):
+                // MARK: - Populate posts upon success
                 let responseJSON = JSON(response.data!)
                 let postsJSON = responseJSON["posts"] as JSON
                 for (_,postJSON) in postsJSON {
@@ -40,6 +51,11 @@ class FeedController: UITableViewController {
                     DispatchQueue.main.async(execute: {
                         self.tableView.reloadData()
                     })
+                    if let refreshControl = self.refreshControl {
+                        if refreshControl.isRefreshing {
+                            refreshControl.endRefreshing()
+                        }
+                    }
                 }
             case .failure(let error):
                 print(error)
@@ -77,6 +93,7 @@ class FeedController: UITableViewController {
         return 125
     }
     
+    //MARK: - Placeholder for initial screen
     override func numberOfSections(in tableView: UITableView) -> Int {
         var numOfSections: Int = 0
         if posts.count>0
@@ -104,9 +121,11 @@ class FeedController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.posts.count
     }
-    
+
+    //MARK: - Tap on cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "showPostDetail", sender: self)
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

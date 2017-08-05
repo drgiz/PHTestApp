@@ -11,7 +11,7 @@ import SDWebImage
 import SafariServices
 
 class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var postScreenshot: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var getItButton: UIButton!
@@ -21,12 +21,23 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     var redirectUrl: URL?
     
     override func viewDidLoad() {
-        title = post?.name
         
+        //MARK: - Dynamic cell height
         tableView.estimatedRowHeight = 36
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        //MARK: - Get it button setup
+        getItButton.backgroundColor = UIColor.productHuntOrange
+        getItButton.setTitleColor(UIColor.white, for: .normal)
+        if let font = UIFont(name: "Helvetica", size: 24.0) {
+            getItButton.setAttributedTitle(NSAttributedString(string: "Get it!", attributes:
+                [NSForegroundColorAttributeName: UIColor.white,
+                 NSFontAttributeName: font]),
+                                           for: .normal)
+        }
+        
         if let post = post {
+            title = post.name
             if post.screenshot_url_350px != "" {
                 postScreenshot.sd_setImage(with: URL(string: post.screenshot_url_350px))
             } else if post.screenshot_url_850px != "" {
@@ -42,41 +53,39 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
+    //MARK: - Populate cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: postDetailCellIdentifier, for: indexPath)
-        if let cell = cell as? PostDetailTableViewCell {
+        if let cell = cell as? PostDetailTableViewCell, let post = post {
             switch indexPath.row {
             case 0:
                 cell.fieldLabel.text = "Name"
-                cell.valueLabel.text = post?.name
+                cell.valueLabel.text = post.name
             case 1:
                 cell.fieldLabel.text = "Tagline"
-                cell.valueLabel.text = post?.tagline
+                cell.valueLabel.text = post.tagline
             case 2:
                 cell.fieldLabel.text = "Upvotes"
-                if let votes_count = post?.votes_count{
-                    cell.valueLabel.text = String(votes_count)
-                }
+                cell.valueLabel.text = String(post.votes_count)
             case 3:
                 cell.fieldLabel.text = "URL"
-                cell.valueLabel.text = post?.redirect_url
+                cell.valueLabel.text = post.redirect_url
             default:
                 cell.fieldLabel.text = ""
                 cell.valueLabel.text = ""
             }
         }
         return cell
-
     }
+    //MARK: - External URL in SFSafariVC
     @IBAction func getItButtonTap(_ sender: Any) {
         if let url = redirectUrl {
             let safariController = SFSafariViewController(url: url)
             UIApplication.shared.statusBarStyle = .default
             present(safariController, animated: true, completion: nil)
-//            UIApplication.shared.open(url)
         }
     }
     
