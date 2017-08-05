@@ -11,6 +11,9 @@
 		635D08571F31F19C00DD8157 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635D08561F31F19C00DD8157 /* NetworkManager.swift */; };
 		635D08591F32175100DD8157 /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635D08581F32175100DD8157 /* ApplicationManager.swift */; };
 		635D085C1F32681600DD8157 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635D085B1F32681600DD8157 /* PostCell.swift */; };
+		636F2BC61F34FDE200F55D81 /* PostDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636F2BC51F34FDE100F55D81 /* PostDetailController.swift */; };
+		636F2BD21F35074A00F55D81 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636F2BD11F35074A00F55D81 /* PostCell.xib */; };
+		636F2BD41F35078D00F55D81 /* PostDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636F2BD31F35078D00F55D81 /* PostDetailTableViewCell.swift */; };
 		6380AF4D1F30987E000EDC6A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6380AF4C1F30987E000EDC6A /* Collection.swift */; };
 		6380AF511F30A24A000EDC6A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6380AF501F30A24A000EDC6A /* User.swift */; };
 		638721E51F33890300EB206A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638721E41F33890300EB206A /* Post.swift */; };
@@ -19,7 +22,7 @@
 		6399A9161F2FEB5B0023A9BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6399A9141F2FEB5B0023A9BD /* Main.storyboard */; };
 		6399A9181F2FEB5B0023A9BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6399A9171F2FEB5B0023A9BD /* Assets.xcassets */; };
 		6399A91B1F2FEB5B0023A9BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6399A9191F2FEB5B0023A9BD /* LaunchScreen.storyboard */; };
-		63BF2CBB1F32745A0070CA40 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BF2CBA1F32745A0070CA40 /* PostCell.xib */; };
+		63E566CC1F3537AE001F230C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E566CB1F3537AE001F230C /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		635D08561F31F19C00DD8157 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		635D08581F32175100DD8157 /* ApplicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
 		635D085B1F32681600DD8157 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		636F2BC51F34FDE100F55D81 /* PostDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailController.swift; sourceTree = "<group>"; };
+		636F2BD11F35074A00F55D81 /* PostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
+		636F2BD31F35078D00F55D81 /* PostDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6380AF4C1F30987E000EDC6A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		6380AF501F30A24A000EDC6A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		638721E41F33890300EB206A /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -37,7 +43,7 @@
 		6399A9171F2FEB5B0023A9BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6399A91A1F2FEB5B0023A9BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6399A91C1F2FEB5B0023A9BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63BF2CBA1F32745A0070CA40 /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
+		63E566CB1F3537AE001F230C /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		76833087F03AB4E5BA4D9306 /* Pods-PHTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PHTestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-PHTestApp/Pods-PHTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		AAC4D84C4D438621DB61932C /* Pods-PHTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PHTestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PHTestApp/Pods-PHTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				635D085B1F32681600DD8157 /* PostCell.swift */,
+				636F2BD31F35078D00F55D81 /* PostDetailTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -93,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				6399A9121F2FEB5B0023A9BD /* FeedController.swift */,
+				636F2BC51F34FDE100F55D81 /* PostDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -101,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				6399A9141F2FEB5B0023A9BD /* Main.storyboard */,
-				63BF2CBA1F32745A0070CA40 /* PostCell.xib */,
+				636F2BD11F35074A00F55D81 /* PostCell.xib */,
 				6399A9191F2FEB5B0023A9BD /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
@@ -129,16 +137,25 @@
 			isa = PBXGroup;
 			children = (
 				6399A9101F2FEB5B0023A9BD /* AppDelegate.swift */,
-				635D08561F31F19C00DD8157 /* NetworkManager.swift */,
-				635D08581F32175100DD8157 /* ApplicationManager.swift */,
 				6380AF4E1F309886000EDC6A /* Model */,
 				635D085D1F32681D00DD8157 /* View */,
 				6380AF4F1F309890000EDC6A /* Controller */,
 				638721E61F33B14D00EB206A /* Storyboards */,
+				63E566CD1F361795001F230C /* Support Files */,
 				6399A9171F2FEB5B0023A9BD /* Assets.xcassets */,
-				6399A91C1F2FEB5B0023A9BD /* Info.plist */,
 			);
 			path = PHTestApp;
+			sourceTree = "<group>";
+		};
+		63E566CD1F361795001F230C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				635D08561F31F19C00DD8157 /* NetworkManager.swift */,
+				635D08581F32175100DD8157 /* ApplicationManager.swift */,
+				63E566CB1F3537AE001F230C /* UIColorExtension.swift */,
+				6399A91C1F2FEB5B0023A9BD /* Info.plist */,
+			);
+			name = "Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,8 +221,8 @@
 			files = (
 				6399A91B1F2FEB5B0023A9BD /* LaunchScreen.storyboard in Resources */,
 				6399A9181F2FEB5B0023A9BD /* Assets.xcassets in Resources */,
+				636F2BD21F35074A00F55D81 /* PostCell.xib in Resources */,
 				6399A9161F2FEB5B0023A9BD /* Main.storyboard in Resources */,
-				63BF2CBB1F32745A0070CA40 /* PostCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,12 +281,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				636F2BD41F35078D00F55D81 /* PostDetailTableViewCell.swift in Sources */,
 				635D08591F32175100DD8157 /* ApplicationManager.swift in Sources */,
 				6380AF511F30A24A000EDC6A /* User.swift in Sources */,
 				6380AF4D1F30987E000EDC6A /* Collection.swift in Sources */,
 				638721E51F33890300EB206A /* Post.swift in Sources */,
 				635D08571F31F19C00DD8157 /* NetworkManager.swift in Sources */,
+				636F2BC61F34FDE200F55D81 /* PostDetailController.swift in Sources */,
 				6399A9131F2FEB5B0023A9BD /* FeedController.swift in Sources */,
+				63E566CC1F3537AE001F230C /* UIColorExtension.swift in Sources */,
 				635D085C1F32681600DD8157 /* PostCell.swift in Sources */,
 				6399A9111F2FEB5B0023A9BD /* AppDelegate.swift in Sources */,
 			);

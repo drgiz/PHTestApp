@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostCell: UITableViewCell {
+class PostCell: UITableViewCell {    
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var tagline: UILabel!
