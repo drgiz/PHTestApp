@@ -26,13 +26,13 @@ class ApplicationManager {
         self.networkManager = NetworkManager()
     }
     
-    func getPostsFeed(withCategory: Category? = nil, numberOfPosts: Int? = nil, response: @escaping (_ response: DataResponse<Any>) -> Void) {
+    func getPostsFeed(withCategory: String? = nil, numberOfPosts: Int? = nil, response: @escaping (_ response: DataResponse<Any>) -> Void) {
         let url = baseURL+"posts"
         var parameters = ["sort_by":"created_at",
                           "order":"asc",
                           "access_token":access_token]
         if let category = withCategory {
-            parameters["search[category]"] = category.rawValue
+            parameters["search[category]"] = category
         }
         if let numberOfPosts = numberOfPosts {
             parameters["per_page"] = String(numberOfPosts)

@@ -17,6 +17,11 @@ class FeedController: UITableViewController {
     let applicationManager = ApplicationManager.shared
     let postCellIdentifier = "PostCell"
     
+    let categories = ["Tech","Games","Podcasts","Books"]
+    
+    var updateInProgress = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,11 +42,20 @@ class FeedController: UITableViewController {
     }
     
     func fetchFeedFromInternet() {
-        fetchFeed()
+        if !updateInProgress {
+            updateInProgress = true
+            fetchFeed()
+        }
     }
     
     func fetchFeed() {
-        applicationManager.getPostsFeed(withCategory: Category.Tech, numberOfPosts: 10, response: { response in
+        var navigationTitle = String()
+        if let title = self.navigationItem.title {
+            navigationTitle = title
+        } else {
+            navigationTitle = "Tech"
+        }
+        applicationManager.getPostsFeed(withCategory: navigationTitle.lowercased(), response: { response in
             switch response.result {
             case .success( _):
                 self.posts = [Post]()
@@ -51,18 +65,19 @@ class FeedController: UITableViewController {
                 for (_,postJSON) in postsJSON {
                     let post = Post(json: postJSON)
                     self.posts.append(post)
-                    DispatchQueue.main.async(execute: {
-                        self.tableView.reloadData()
-                    })
-                    if let refreshControl = self.refreshControl {
-                        if refreshControl.isRefreshing {
-                            refreshControl.endRefreshing()
-                        }
+                }
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
+                if let refreshControl = self.refreshControl {
+                    if refreshControl.isRefreshing {
+                        refreshControl.endRefreshing()
                     }
                 }
             case .failure(let error):
                 print(error)
             }
+            self.updateInProgress = false
         })
     }
     
@@ -71,7 +86,7 @@ class FeedController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-// MARK: - Table view data source
+    // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: postCellIdentifier, for: indexPath)
@@ -96,7 +111,7 @@ class FeedController: UITableViewController {
         return 125
     }
     
-    //MARK: - Placeholder for initial screen
+    //MARK: - Placeholder for blank table
     override func numberOfSections(in tableView: UITableView) -> Int {
         var numOfSections: Int = 0
         if posts.count>0
@@ -124,7 +139,7 @@ class FeedController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.posts.count
     }
-
+    
     //MARK: - Tap on cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "showPostDetail", sender: self)
@@ -140,9 +155,62 @@ class FeedController: UITableViewController {
         }
     }
     
+    //MARK: - Category button tap responder & UIPicker Methods
+    
+    @IBAction func tapCategoriesButton(_ sender: Any) {
+        
+        
+        //Configure blurry background
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.tag = 9
+        blurEffectView.frame = (self.navigationController?.view.bounds)!
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissCategoryPicker))
+        blurEffectView.addGestureRecognizer(tapGesture)
+        self.navigationController?.view.addSubview(blurEffectView)
+        
+        //Configure UIPicker
+        let categoryPicker = UIPickerView(frame: CGRect(x:0, y:0, width:(self.navigationController?.view.bounds.width)!, height:300))
+        categoryPicker.tag = 10;
+        categoryPicker.delegate = self
+        categoryPicker.dataSource = self
+        if let title = self.navigationItem.title {
+            if let index = categories.index(of: title) {
+                categoryPicker.selectRow(index, inComponent: 0, animated: false)
+            }
+        }
+        categoryPicker.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.navigationController?.view.addSubview(categoryPicker)
+        
+        //Configure TooolBar
+        let toolbar = UIToolbar(frame: CGRect(x:0, y:0, width:(self.navigationController?.view.bounds.width)!, height:64))
+        toolbar.tag = 11
+        toolbar.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        toolbar.barStyle = UIBarStyle.blackTranslucent
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissCategoryPicker))
+        doneButton.tintColor = .white
+        toolbar.setItems([spacer,doneButton], animated: true)
+        self.navigationController?.view.addSubview(toolbar)
+        
+    }
+    
+    func dismissCategoryPicker() {
+        removeViews()
+        fetchFeedFromInternet()
+    }
+    
+    func removeViews() {
+        self.navigationController?.view.viewWithTag(9)?.removeFromSuperview()
+        self.navigationController?.view.viewWithTag(10)?.removeFromSuperview()
+        self.navigationController?.view.viewWithTag(11)?.removeFromSuperview()
+    }
+    
 }
 
-//MARK: - Image Prefetching
+//MARK: - Table view Image Prefetching
 extension FeedController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         var urls:[URL]?
@@ -156,6 +224,44 @@ extension FeedController: UITableViewDataSourcePrefetching {
     
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
         SDWebImagePrefetcher.shared().cancelPrefetching()
+    }
+}
+
+//MARK: - UIPickerView delegate & data source
+extension FeedController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categories.count
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return categories[row]
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let selectedCategory = categories[row]
+        self.navigationItem.title = selectedCategory
+    }
+    //MARK: - UIPickerView customization
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var label: UILabel
+        if let view = view as? UILabel {
+            label = view
+        } else {
+            label = UILabel()
+        }
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Helvetica", size: 18)
+        label.text = categories[row]
+        return label
     }
 }
 

@@ -25,7 +25,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tech" id="5RQ-Qx-urF">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="zCi-fE-bth"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="zCi-fE-bth">
+                            <connections>
+                                <action selector="tapCategoriesButton:" destination="5QK-zO-Z5a" id="6Mz-kS-hSQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="1Qk-Vd-kzE" kind="show" identifier="showPostDetail" id="beX-Gd-dlM"/>
