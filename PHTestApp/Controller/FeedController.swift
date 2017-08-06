@@ -270,7 +270,7 @@ extension FeedController: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Helvetica", size: 18)
+        label.font = UIFont(name: "Helvetica", size: 24)
         label.text = categories[row]
         return label
     }

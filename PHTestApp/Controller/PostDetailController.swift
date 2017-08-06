@@ -41,6 +41,8 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
                 postScreenshot.sd_setImage(with: URL(string: post.screenshot_url_350px))
             } else if post.screenshot_url_850px != "" {
                 postScreenshot.sd_setImage(with: URL(string: post.screenshot_url_850px))
+            } else {
+                postScreenshot.image = #imageLiteral(resourceName: "productHuntTemplate")
             }
             if let url = URL(string:post.redirect_url) {
                 getItButton.isEnabled = true

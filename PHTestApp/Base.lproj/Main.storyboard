@@ -25,7 +25,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tech" id="5RQ-Qx-urF">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="zCi-fE-bth">
+                        <barButtonItem key="rightBarButtonItem" image="categoryItems" id="zCi-fE-bth">
                             <connections>
                                 <action selector="tapCategoriesButton:" destination="5QK-zO-Z5a" id="6Mz-kS-hSQ"/>
                             </connections>
@@ -158,4 +158,7 @@
             <point key="canvasLocation" x="-103" y="116"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="categoryItems" width="30" height="26"/>
+    </resources>
 </document>

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //MARK: - Customize UINavigationBar appearenc
         UINavigationBar.appearance().barTintColor = UIColor.productHuntOrange
         UINavigationBar.appearance().tintColor = UIColor.white
-        if let font = UIFont(name: "Helvetica", size: 24.0) {
+        if let font = UIFont(name: "Helvetica", size: 26.0) {
             UINavigationBar.appearance().titleTextAttributes =
                 [NSForegroundColorAttributeName: UIColor.white,
                  NSFontAttributeName: font]
