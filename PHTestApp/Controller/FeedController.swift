@@ -27,7 +27,10 @@ class FeedController: UITableViewController {
         
         tableView.prefetchDataSource = self
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
         
         let nib = UINib (nibName: postCellIdentifier, bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: postCellIdentifier)
@@ -53,7 +56,7 @@ class FeedController: UITableViewController {
         if let title = self.navigationItem.title {
             navigationTitle = title
         } else {
-            navigationTitle = "Tech"
+            navigationTitle = categories[0]
         }
         applicationManager.getPostsFeed(withCategory: navigationTitle.lowercased(), response: { response in
             switch response.result {
@@ -69,14 +72,16 @@ class FeedController: UITableViewController {
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
                 })
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            DispatchQueue.main.async(execute: {
                 if let refreshControl = self.refreshControl {
                     if refreshControl.isRefreshing {
                         refreshControl.endRefreshing()
                     }
                 }
-            case .failure(let error):
-                print(error)
-            }
+            })
             self.updateInProgress = false
         })
     }
@@ -127,7 +132,7 @@ class FeedController: UITableViewController {
                                                              y: 0,
                                                              width: tableView.bounds.size.width,
                                                              height: tableView.bounds.size.height))
-            noDataLabel.text = "No data to display :("
+            noDataLabel.text = "No posts to display :("
             noDataLabel.textColor = UIColor.black
             noDataLabel.textAlignment = .center
             tableView.backgroundView = noDataLabel
@@ -159,8 +164,12 @@ class FeedController: UITableViewController {
     
     @IBAction func tapCategoriesButton(_ sender: Any) {
         
+        //Check if view with tag9 already exists
+        if (self.view.viewWithTag(9) != nil) {
+            return
+        }
         
-        //Configure blurry background
+        //MARK: - Configure blurry background
         self.navigationController?.view.backgroundColor = UIColor.clear
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -171,7 +180,7 @@ class FeedController: UITableViewController {
         blurEffectView.addGestureRecognizer(tapGesture)
         self.navigationController?.view.addSubview(blurEffectView)
         
-        //Configure UIPicker
+        //MARK: - Configure UIPicker
         let categoryPicker = UIPickerView(frame: CGRect(x:0, y:0, width:(self.navigationController?.view.bounds.width)!, height:300))
         categoryPicker.tag = 10;
         categoryPicker.delegate = self
@@ -179,12 +188,14 @@ class FeedController: UITableViewController {
         if let title = self.navigationItem.title {
             if let index = categories.index(of: title) {
                 categoryPicker.selectRow(index, inComponent: 0, animated: false)
+            } else {
+                categoryPicker.selectRow(0, inComponent: 0, animated: false)
             }
         }
         categoryPicker.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.navigationController?.view.addSubview(categoryPicker)
         
-        //Configure TooolBar
+        //MARK: - Configure TooolBar
         let toolbar = UIToolbar(frame: CGRect(x:0, y:0, width:(self.navigationController?.view.bounds.width)!, height:64))
         toolbar.tag = 11
         toolbar.autoresizingMask = [.flexibleWidth, .flexibleHeight]
