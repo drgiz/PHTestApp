@@ -41,7 +41,13 @@ class FeedController: UITableViewController {
         refreshControl?.tintColor = .gray
         refreshControl?.addTarget(self, action: #selector(fetchFeedFromInternet), for: .valueChanged)
         
+        fetchFeedFromLocalStorage()
         fetchFeed()
+    }
+    
+    func fetchFeedFromLocalStorage() {
+        posts = applicationManager.loadPosts()
+        tableView.reloadData()
     }
     
     func fetchFeedFromInternet() {
@@ -69,6 +75,7 @@ class FeedController: UITableViewController {
                     let post = Post(json: postJSON)
                     self.posts.append(post)
                 }
+                self.applicationManager.savePosts(posts: self.posts)
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
                 })
@@ -155,6 +162,9 @@ class FeedController: UITableViewController {
         if segue.identifier == "showPostDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! PostDetailController
+                if let url = URL(string:posts[indexPath.row].screenshot_url_350px) {
+                    SDWebImagePrefetcher.shared().prefetchURLs([url])
+                }
                 destinationController.post = posts[indexPath.row]
             }
         }

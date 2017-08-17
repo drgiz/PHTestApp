@@ -37,17 +37,29 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if let post = post {
             title = post.name
+            var postScreenshotURL: URL? = nil
             if post.screenshot_url_350px != "" {
-                postScreenshot.sd_setImage(with: URL(string: post.screenshot_url_350px))
+                postScreenshotURL = URL(string: post.screenshot_url_350px)
             } else if post.screenshot_url_850px != "" {
-                postScreenshot.sd_setImage(with: URL(string: post.screenshot_url_850px))
-            } else {
-                postScreenshot.image = #imageLiteral(resourceName: "productHuntTemplate")
+                postScreenshotURL = URL(string: post.screenshot_url_850px)
             }
+            if let postScreenshotURL = postScreenshotURL {
+                postScreenshot.sd_setShowActivityIndicatorView(true)
+                postScreenshot.sd_setIndicatorStyle(.gray)
+                postScreenshot.sd_setImage(with: postScreenshotURL,
+                                           completed: { (_, error, _, _) in
+                                            guard error != nil else {return}
+                                            self.postScreenshot.sd_removeActivityIndicator()
+                                            })
+                } else {
+                    postScreenshot.image = #imageLiteral(resourceName: "productHuntTemplate")
+                }
             if let url = URL(string:post.redirect_url) {
                 getItButton.isEnabled = true
                 redirectUrl = url
             }
+            
+            
         }
     }
     
